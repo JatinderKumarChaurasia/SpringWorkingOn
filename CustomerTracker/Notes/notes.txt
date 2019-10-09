@@ -1,0 +1,8 @@
+DAO(Data Access Object) - a common design pattern responsible for interfacing with the database.
+Entity Class - Java Class that is mapped to database table
+@Transactional - a annotation that auto-magically begin and end transaction for our hibernate code instead of doing like:
+   session.beginTransaction() or session.getTransaction.commit(); @Transactional do that work for us.
+@Repository - annotation applied for DAO Implementations - inherit from @Component
+ -- spring automatically register the DAO implementations using component-scanning.
+ -- it also provides translation of any JDBC related exceptions.
+@Component - where spring do component scanning for java beans
