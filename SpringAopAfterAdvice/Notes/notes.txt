@@ -1,0 +1,22 @@
+Advice Types
+   - Before Advice - runs before the method - @Before
+   - After Returning Advice - runs after the method execution (successful execution) - @AfterReturning
+       - useful when logging ,transactions,security
+       - Audit Logging - who,what,when,where
+       - post process the data before returning to the caller
+       - format the data
+   - After Throwing Advice - run after method (when method throw exception)
+   - After finally Advice - run after the method (finally)
+   - Around Advice - run before and after the method
+- To Control the order of Advice
+     - place advices in separate aspects
+     - control order on aspects using @Order Annotation
+          - guarantee order of when aspects will applied
+          - lowers numbers have higher precedence
+             - range Integer.MIN_VALUE to Integer.MAX_VALUE
+             - Negative Numbers are allowed
+             - does not have to be consecutive
+          - if aspects have same order then they are undefined
+
+How to access the information about the method,method args while using aspects  
+   -- JoinPoint has the information/metadata about the method that is executing /Method Signature

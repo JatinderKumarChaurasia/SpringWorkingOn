@@ -1,0 +1,12 @@
+- To Control the order of Advice
+     - place advices in separate aspects
+     - control order on aspects using @Order Annotation
+          - guarantee order of when aspects will applied
+          - lowers numbers have higher precedence
+             - range Integer.MIN_VALUE to Integer.MAX_VALUE
+             - Negative Numbers are allowed
+             - does not have to be consecutive
+          - if aspects have same order then they are undefined
+
+How to access the information about the method,method args while using aspects  
+   -- JoinPoint has the information/metadata about the method that is executing /Method Signature
