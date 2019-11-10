@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:secure="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</head>
+<body>
+	<p>Hello I am In Home Right Now !!</p>
+	<h2>Company Home Page</h2>
+	<hr />
+	<p>
+		Welcome To Home Page! <span secure:authentication="name"></span>
+	</p>
+	<hr />
+	<div class="container jumbotron bg-dark text-color-white">
+		<p class="display-4">
+			UserName : <span style="color: green" secure:authentication="name"></span><br />
+			Role : <span style="color: green"
+				secure:authentication="principal.authorities"></span><br />
+			<!-- <security:authenticate property="principal.username" />
+		<br /> Role :
+		<security:authentication property="principal.authorities" /> -->
+		</p>
+		<div th:if="${session.user}">
+			<p
+				th:text="'First Name : '+ ${session.user.firstname}+', Last Name : '+${session.user.lastname} + ',Email : '+${session.user.email}"></p>
+		</div>
+	</div>
+	<div class="card" secure:authorize="hasRole('ROLE_MANAGER)">
+		<div class="card-body">
+			<p>
+				<a th:href="@{/leaders}">Leaders Meeting </a> Only For Manager
+			</p>
+		</div>
+	</div>
+	<div class="card" secure:authorize="hasRole('ROLE_ADMIN">
+		<div class="card-body">
+			<p>
+				<a th:href="@{/systems}">System Manager Meeting </a> Only For Admins
+			</p>
+		</div>
+	</div>
+	<form th:action="@{/logout}" method="POST">
+		<input type="submit" value="Logout">
+	</form>
+	<br />
+</body>
+</html>

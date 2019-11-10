@@ -1,0 +1,150 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Registration Page</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</head>
+<body>
+	<div class="container jumbotron mt-4">
+		<div class="card" style="width: 25rem">
+			<div class="card-header">
+				<div class="card-title">
+					<p class="display-4">Register Yourself</p>
+				</div>
+			</div>
+			<div class="container card-body" style="padding-top: 30px">
+				<div class="form-horizontal">
+					<form th:action="@{/register/processRegistration}"
+						th:object="${crmUser}" method="POST">
+						<div class="form-group">
+							<div class="col-xs-15">
+								<div th:if="${registrationError}">
+									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
+										${registrationError}</div>
+								</div>
+							</div>
+						</div>
+						<div class="input-group m-1">
+							<div class="input-group-prepend p-2 w-50">
+								<p>UserName</p>
+								<div th:if="${#fields.hasErrors('username')}"
+									style="margin-top: 25px" class="text-danger">
+									<ul>
+										<li th:each="erro: ${#fields.errors('username')}"
+											th:text="'User Name has Error : '+ ${erro}" />
+									</ul>
+								</div>
+							</div>
+							<input type="text" class="form-control" th:field="*{username}"
+								placeholder="Enter Your Username" name="username"
+								th:errorclass="fieldError">
+						</div>
+						<div class="input-group m-1">
+							<div class="input-group-prepend p-2 w-50">
+								<p>Password</p>
+								<div th:if="${#fields.hasErrors('password')}"
+									style="margin-top: 25px" class="text-danger">
+									<ul>
+										<li th:each="erro: ${#fields.errors('password')}"
+											th:text="'Password has Error : '+ ${erro}" />
+									</ul>
+								</div>
+							</div>
+							<input type="password" th:field="*{password}"
+								class="form-control" placeholder="Enter Your Password"
+								name="password" th:errorclass="fieldError" />
+						</div>
+						<div class="input-group m-1">
+							<div class="input-group-prepend p-2 w-50">
+								<p>Confirm Password</p>
+								<div th:if="${#fields.hasErrors('matchingPassword')}"
+									style="margin-top: 25px" class="text-danger">
+									<ul>
+										<li th:each="erro: ${#fields.errors('matchingPassword')}"
+											th:text="'Password Does Not Match Error : '+ ${erro}" />
+									</ul>
+								</div>
+							</div>
+							<input type="password" th:field="*{matchingPassword}"
+								class="form-control" placeholder="Confirm Password"
+								name="matchingPassword" th:errorclass="fieldError" />
+						</div>
+						<div class="input-group m-1">
+							<div class="input-group-prepend p-2 w-50">
+								<p>First Name</p>
+								<div th:if="${#fields.hasErrors('firstname')}"
+									style="margin-top: 25px" class="text-danger">
+									<ul>
+										<li th:each="erro: ${#fields.errors('firstname')}"
+											th:text="'First Name not be empty: '+ ${erro}" />
+									</ul>
+								</div>
+							</div>
+							<input th:field="*{firstname}" type="text" class="form-control"
+								placeholder="Enter Your First Name" name="firstname"
+								th:errorclass="fieldError" />
+						</div>
+						<div class="input-group m-1">
+							<div class="input-group-prepend p-2 w-50">
+								<p>Last Name</p>
+								<div th:if="${#fields.hasErrors('lastname')}"
+									style="margin-top: 25px" class="text-danger">
+									<ul>
+										<li th:each="erro: ${#fields.errors('lastname')}"
+											th:text="'Last Name not be empty: '+ ${erro}" />
+									</ul>
+								</div>
+							</div>
+							<input th:field="*{lastname}" type="text" class="form-control"
+								placeholder="Enter Your Last Name" name="lastname"
+								th:errorclass="fieldError" />
+						</div>
+						<div class="input-group m-1">
+							<div class="input-group-prepend p-2 w-50">
+								<p>Email</p>
+								<div th:if="${#fields.hasErrors('email')}"
+									style="margin-top: 25px" class="text-danger">
+									<ul>
+										<li th:each="erro: ${#fields.errors('email')}"
+											th:text="'Email not be empty: '+ ${erro}" />
+									</ul>
+								</div>
+							</div>
+							<input th:field="*{email}" type="text" class="form-control"
+								placeholder="Enter Your Email" name="email"
+								th:errorclass="fieldError" />
+						</div>
+						<div class="input-group m-1">
+							<div class="input-group-prepend p-2 w-50">
+								<p>Role</p>
+								<div th:if="${#fields.hasErrors('userRole')}"
+									style="margin-top: 25px" class="text-danger">
+									<ul>
+										<li th:each="erro: ${#fields.errors('userRole')}"
+											th:text="'Email not be empty: '+ ${erro}" />
+									</ul>
+								</div>
+							</div>
+							<select th:field="*{userRole}" class="form-control">
+								<option th:each="i:${roles}" th:text="${i}" th:value="${i}"></option>
+							</select>
+						</div>
+						<div style="margin-top: 19px" class="form-group">
+							<div class="col-sm-6 controls">
+								<button type="submit" class="btn btn-primary">Register</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

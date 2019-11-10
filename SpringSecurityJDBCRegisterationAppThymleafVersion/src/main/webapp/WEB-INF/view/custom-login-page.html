@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Custom Login Page</title>
+</head>
+<body>
+	<h3>Custom Login Page</h3>
+	<form
+		action="@{/authenticateTheUser}"
+		method="POST">
+		<div th:if="${param.error}">
+			<i style="color: red">You Have Entered Wrong userName or Password</i>
+		</div>
+		<p>
+			UserName : <input type="text" placeholder="Enter Your UserName"
+				name="username" />
+		</p>
+		<p>
+			Password : <input type="password" placeholder="Enter Your Password"
+				name="password" />
+		</p>
+		<button type="submit" value="Login">Login</button>
+	</form>
+</body>
+</html>
